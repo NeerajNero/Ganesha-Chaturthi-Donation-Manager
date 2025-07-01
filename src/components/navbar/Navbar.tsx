@@ -5,11 +5,15 @@ import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { useSession } from 'next-auth/react' // ✅
 
-const navItems = [
+const baseNavItems = [
   { name: 'Dashboard', href: '/dashboard' },
   { name: 'Donations', href: '/donations' },
   { name: 'Expenses', href: '/expenses' },
+]
+
+const protectedNavItems = [
   { name: 'Add Donation', href: '/addDonation' },
   { name: 'Add Expense', href: '/addExpense' },
 ]
@@ -17,6 +21,9 @@ const navItems = [
 export function FestivalNavbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const { data: session } = useSession() // ✅ get session
+
+  const navItems = [...baseNavItems, ...(session?.user ? protectedNavItems : [])]
 
   return (
     <nav className="w-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white shadow-md">

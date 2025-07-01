@@ -6,8 +6,6 @@ export async function middleware(req: NextRequest) {
   const session = await auth()
 
   const protectedRoutes = [
-    '/donations',
-    '/expenses',
     '/addDonation',
     '/addExpense'
   ]
