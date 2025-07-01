@@ -65,9 +65,13 @@ export function AddDonationForm() {
 
       toast.success(`Donation from ${data.donorName} added!`)
       form.reset()
-    } catch (err: any) {
-      toast.error(err.message || 'Something went wrong')
-    } finally {
+    } catch (err: unknown) {
+  if (err instanceof Error) {
+    toast.error(err.message)
+  } else {
+    toast.error('Something went wrong')
+  }
+} finally {
       setLoading(false)
     }
   }
