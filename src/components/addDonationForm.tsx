@@ -22,7 +22,9 @@ const formSchema = z.object({
   amount: z.coerce.number().min(1, 'Amount must be at least ₹1'),
   mode: z.enum(['cash', 'upi', 'cheque']),
   notes: z.string().optional(),
-  image: z.any().optional(),
+  image: z.custom<FileList>().optional().refine((file) => file?.[0] instanceof File || file === undefined, {
+    message: 'Invalid file',
+  }),
 })
 
 type DonationFormValues = z.infer<typeof formSchema>
@@ -37,7 +39,7 @@ export function AddDonationForm() {
       amount: 0,
       mode: 'cash',
       notes: '',
-      image: undefined,
+      image: undefined as unknown as FileList, // Use undefined to allow no file initially
     },
   })
 
@@ -80,7 +82,7 @@ export function AddDonationForm() {
             <FormItem>
               <FormLabel>Donor Name</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Rajesh Sharma" {...field} />
+                <Input placeholder="e.g., Neeraj Sharma" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

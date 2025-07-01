@@ -14,7 +14,9 @@ const formSchema = z.object({
   amount: z.coerce.number().min(1, { message: 'Amount must be greater than 0' }),
   type: z.enum(['major', 'minor', 'internal'], { required_error: 'Type is required' }),
   notes: z.string().optional(),
-  receipt: z.any().optional(), // File input
+  receipt: z.custom<FileList>().optional().refine((file) => file instanceof FileList || file === undefined, {
+    message: 'Invalid file',
+  })
 })
 
 type FormData = z.infer<typeof formSchema>
@@ -27,7 +29,7 @@ export function AddExpenseForm() {
       amount: 0,
       type: undefined,
       notes: '',
-      receipt: undefined,
+      receipt: undefined as unknown as FileList,    // Use undefined to allow no file initially
     },
   })
 

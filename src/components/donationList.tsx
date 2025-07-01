@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
 
 type Donation = {
   id: string
@@ -65,11 +66,15 @@ export default function DonationList({ limit }: { limit?: number }) {
             {/* Right: Image & Link */}
             {donation.image && (
               <div className="w-[120px] flex-shrink-0 space-y-1 text-center">
-                <img
-                  src={donation.image}
-                  alt="Receipt"
-                  className="h-24 w-auto mx-auto rounded border shadow-sm"
-                />
+                {donation.image && (
+                  <Image
+                    src={donation.image}
+                    alt="Receipt"
+                    width={200}
+                    height={200}
+                    className="h-24 w-auto mx-auto rounded border shadow-sm"
+                  />
+                )}
                 <a
                   href={donation.image}
                   target="_blank"

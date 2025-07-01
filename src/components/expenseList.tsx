@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
+import Image from 'next/image'
 
 type Expense = {
   id: string
@@ -61,11 +62,15 @@ export default function ExpenseList({ limit }: { limit?: number }) {
             </div>
             {expense.receiptUrl && (
               <div className="w-[120px] flex-shrink-0 space-y-1 text-center">
-                <img
+                {expense.receiptUrl && (
+                    <Image
                   src={expense.receiptUrl}
                   alt="Receipt"
+                  width={200}
+                  height={200}
                   className="h-24 w-auto mx-auto rounded border shadow-sm"
                 />
+                )}
                 <a
                   href={expense.receiptUrl}
                   target="_blank"
