@@ -19,11 +19,6 @@ export default function HomePage() {
               🧾 View Dashboard
             </Button>
           </Link>
-          <Link href="/addDonation">
-            <Button variant="outline" className="border-orange-600 text-orange-700 hover:bg-orange-200">
-              ➕ Add Donation
-            </Button>
-          </Link>
         </div>
 
         <p className="text-xs text-muted-foreground pt-4 italic">
