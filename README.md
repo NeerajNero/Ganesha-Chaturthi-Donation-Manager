@@ -157,7 +157,3 @@ Cloudinary Docs
 
 💡 Why This Project?
 I built this to solve a real-world problem during a festival and used the opportunity to learn modern full-stack tools, build a usable product, and improve my ability to debug, deploy, and polish real features end-to-end.
-
-markdown
-Copy
-Edit
